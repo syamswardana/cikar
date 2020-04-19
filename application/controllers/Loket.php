@@ -6,29 +6,27 @@ require APPPATH . 'libraries/REST_Controller.php';
 /**
  *
  */
-class Layanan extends REST_Controller
+class Loket extends REST_Controller
 {
 
   function __construct()
   {
     parent::__construct();
-    $this->load->model('Layanan_model');
+    $this->load->model('Loket_model');
   }
 
   public function index_get()
   {
     $id = $this->get('id');
     if ($id === null) {
-      $layanan = $this->Layanan_model->getLayanan();
+      $loket = $this->Loket_model->getLoket();
     } else {
-      $layanan = $this->Layanan_model->getLayanan($id);
+      $loket = $this->Loket_model->getLoket($id);
     }
-
-
-    if ($layanan) {
+    if ($loket) {
       $this->response([
           'status' => True,
-          'Data' => $layanan
+          'Data' => $loket
       ], REST_Controller::HTTP_OK);
     } else {
       $this->response([
@@ -48,10 +46,10 @@ class Layanan extends REST_Controller
             'message' => 'Isi ID'
         ], REST_Controller::HTTP_BAD_REQUEST);
     } else {
-      if ($this->Layanan_model->deleteLayanan($id) >= 0) {
+      if ($this->Loket_model->deleteLoket($id) >= 0) {
           $this->response([
               'status' => TRUE,
-              'message' => 'Layanan Terhapus'
+              'message' => 'Loket Terhapus'
           ], REST_Controller::HTTP_NO_CONTENT);
       } else {
         $this->response([
@@ -65,19 +63,18 @@ class Layanan extends REST_Controller
   public function index_post()
   {
     $data = [
-        'kode_layanan' => $this->post('kode_layanan'),
-        'nama_layanan' => $this->post('nama_layanan')
+        'nama_loket' => $this->post('nama_loket')
     ];
-
-    if ($this->Layanan_model->addLayanan($data) > 0) {
+    var_dump($data);
+    if ($this->Loket_model->addLoket($data) > 0) {
       $this->response([
           'status' => TRUE,
-          'message' => 'Layanan Ditambahkan'
+          'message' => 'Loket Ditambahkan'
       ], REST_Controller::HTTP_CREATED);
     } else {
       $this->response([
           'status' => FALSE,
-          'message' => 'Gagal menambahkan layanan'
+          'message' => 'Gagal menambahkan Loket'
       ], REST_Controller::HTTP_BAD_REQUEST);
     }
   }
@@ -87,19 +84,18 @@ class Layanan extends REST_Controller
   {
     $id = $this->put('id');
     $data = [
-        'kode_layanan' => $this->put('kode_layanan'),
-        'nama_layanan' => $this->put('nama_layanan')
+        'nama_loket' => $this->put('nama_loket')
     ];
-    $respon = $this->Layanan_model->updateLayanan($data, $id);
+    $respon = $this->Loket_model->updateLoket($data, $id);
     if ($respon > 0) {
       $this->response([
           'status' => TRUE,
-          'message' => 'Layanan Diupdate'
+          'message' => 'Loket Diupdate'
       ], REST_Controller::HTTP_OK);
     } else {
       $this->response([
           'status' => FALSE,
-          'message' => 'Gagal mengupdate layanan'
+          'message' => 'Gagal mengupdate Loket'
       ], REST_Controller::HTTP_BAD_REQUEST);
     }
   }

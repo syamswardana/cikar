@@ -28,3 +28,22 @@ CRUD Users FO
   - domain/users/fo (method : put, params : id, username, password, nama)
 - create
   - domain/users/fo (method : post, params : username, password, nama)
+CRUD Loket
+- get data loket
+  - semua loket
+    - domain/loket (method : get)
+  - spesifik
+      - domain/loket?id=3 (method : get, params : id)
+- delete loket
+  - domain/loket (method : delete, params : id)
+- update loket
+  - domain/loket (method : put, params : id, nama_loket)
+- create Loket
+  - domain/loket (method : post, params : nama_loket)
+Antrian
+- request nomor antrian
+  - domain/antrian/request (method : get, params : id_layanan)
+- riwayat antrian
+  - domain/antrian/riwayat (method : get)
+- call
+  -domain/antrian/call (method : put, params : id_loket, id_layanan);
